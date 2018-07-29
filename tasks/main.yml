@@ -1,0 +1,13 @@
+---
+# tasks file for deploywar
+- name: Check if exsit file Dockerfile
+  command: ls -l /home/avenuecode/devops-challenge-ac002/cfg-management/Dockerfile
+  
+- name: Build image docker for application
+  shell: cd /home/avenuecode/devops-challenge-ac002/cfg-management/ && docker build -t java-chef-test-img .
+
+- name: Create container docker with image built 
+  shell: docker run -dt --name java-chef-test-app -p 8080:8080 java-chef-test-img
+
+- debug:
+    msg: Finsh creation of container, access http://your.addr:8080/java-chef-test/chef/ping
